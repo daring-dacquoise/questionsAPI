@@ -1,2 +1,2 @@
 # questionsAPI
-APIs for the Question &amp; Answer sectjion
+APIs for the Question &amp; Answer section
