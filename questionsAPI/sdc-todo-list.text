@@ -1,0 +1,19 @@
+SDC To-do List
+SKIP Insert full data CSV into database
+write query to get all questions for product
+write query to post an answer
+write query to change helpfulness
+write ctrlr fn for all three
+  - all questions
+  - post an answer
+  - change helpfulness
+write route to get all questions
+write route to post an answer
+write route to update helpfulness
+write one (tests the API) frisby test
+set up new relic (performance monitoring software)
+stress test (k6) -uses computer to spam reqs
+deploy database to AWS
+deploy node app to AWS
+stress test with loader.io - uses different IP address to spam reqs
+                implement one optimization ()
