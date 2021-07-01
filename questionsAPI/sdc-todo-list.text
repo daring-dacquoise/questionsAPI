@@ -17,3 +17,5 @@ deploy database to AWS
 deploy node app to AWS
 stress test with loader.io - uses different IP address to spam reqs
                 implement one optimization ()
+
+EC2 command to scp -i sdc.pem ~/Downloads/reviews.csv ubuntu@

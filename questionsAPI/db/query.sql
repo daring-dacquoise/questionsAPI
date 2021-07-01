@@ -1,0 +1,3 @@
+select questions.*, answers.*, photos.url as photos_id, photos.answer_id, photos.url from answers left join photos on answers.id = photos.answer_id inner join questions on questions.id = answers.question_id where question.id = 1\G
+
+SELECT questions.*, answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, photos.answer_id as photos_answer_id, photos.url from questions left join answers on questions.id = answers.question_id left join photos on answers.id = photos.answer_id where questions.product_id = 1\G
