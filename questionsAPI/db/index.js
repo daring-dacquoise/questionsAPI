@@ -18,11 +18,17 @@ const dateConverter = function (num) {
 
 const getQuestions = function (callback, productId) {
   connection.query(`SELECT questions.*, answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, photos.answer_id as photos_answer_id, photos.url from questions left join answers on questions.id = answers.question_id left join photos on answers.id = photos.answer_id where questions.product_id = ${productId}`, function (err, data) {
+
+    // console.log(data);
+
     let result = {
       product_id: productId,
       results: []
     };
+
     data.forEach(question => {
+      let questionIndex = result.results.findIndex(x => x.question_id === question.id)
+
       let questionObj = {
         question_id: question.id,
         question_body: question.body,
@@ -30,18 +36,34 @@ const getQuestions = function (callback, productId) {
         asker_name: question.asker_name,
         question_helpfulness: question.helpful,
         reported: question.reported === 0 ? false : true,
-        answers: {
+        answers: (question.answer_id ? {
           [question.answer_id]: {
             id: question.answer_id,
             body: question.answer_body,
             date: question.answer_date ? dateConverter(question.answer_date) : null,
             answerer_name: question.answerer_name,
             helpfulness: question.answer_helpful,
-            photos: [question.url]
+            photos: question.url ? [question.url] : []
           }
+        } : {})
+      }
+
+      if (result.results.length === 0 || questionIndex === -1) {
+        result.results.push(questionObj);
+      } else {
+        result.results[questionIndex].answers[question.answer_id] ?
+        result.results[questionIndex].answers[question.answer_id].photos.push(question.url) :
+        result.results[questionIndex].answers[question.answer_id] =
+        {
+          id: question.answer_id,
+          body: question.answer_body,
+          date: question.answer_date ? dateConverter(question.answer_date) : null,
+          answerer_name: question.answerer_name,
+          helpfulness: question.answer_helpful,
+          photos: question.url ? [question.url] : []
         }
       }
-      result.results.push(questionObj);
+      // console.log(questionIndex, 'this is index of question in results array');
     });
     if (err) {
       console.log(err);
