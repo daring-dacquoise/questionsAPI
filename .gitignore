@@ -2,3 +2,4 @@ sdc_data/
 node_modules/
 SDC.pem
 aws.sh
+./questionsAPI/db/config.js
