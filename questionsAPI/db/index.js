@@ -42,7 +42,6 @@ const getQuestions = function (callback, productId) {
         }
       }
       result.results.push(questionObj);
-
     });
     if (err) {
       console.log(err);
