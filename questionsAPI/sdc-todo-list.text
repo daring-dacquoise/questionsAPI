@@ -2,14 +2,14 @@ SDC To-do List
 
 SKIP Insert full data CSV into database
 x write query to get all questions for product
-write query to post an answer
+x write query to post an answer
 write query to change helpfulness
 write ctrlr fn for all three
 x - all questions
-  - post an answer
+x  - post an answer
   - change helpfulness
 x write route to get all questions
-write route to post an answer
+x write route to post an answer
 write route to update helpfulness
 write one (tests the API) frisby test
 set up new relic (performance monitoring software)
@@ -20,3 +20,5 @@ stress test with loader.io - uses different IP address to spam reqs
                 implement one optimization ()
 
 EC2 command to scp -i sdc.pem ~/Downloads/reviews.csv ubuntu@
+
+scp -i SDC.pem ~/Users/johnamielyasis/Documents/Work/hr/w8/sdc/sdc_data/baby_questions.csv ubuntu@ip-172-31-7-148:~/home/ubuntu

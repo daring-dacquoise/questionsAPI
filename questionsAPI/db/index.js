@@ -52,16 +52,16 @@ const getQuestions = function (callback, productId) {
         result.results.push(questionObj);
       } else {
         result.results[questionIndex].answers[question.answer_id] ?
-        result.results[questionIndex].answers[question.answer_id].photos.push(question.url) :
-        result.results[questionIndex].answers[question.answer_id] =
-        {
-          id: question.answer_id,
-          body: question.answer_body,
-          date: question.answer_date ? dateConverter(question.answer_date) : null,
-          answerer_name: question.answerer_name,
-          helpfulness: question.answer_helpful,
-          photos: question.url ? [question.url] : []
-        }
+          result.results[questionIndex].answers[question.answer_id].photos.push(question.url) :
+          result.results[questionIndex].answers[question.answer_id] =
+          {
+            id: question.answer_id,
+            body: question.answer_body,
+            date: question.answer_date ? dateConverter(question.answer_date) : null,
+            answerer_name: question.answerer_name,
+            helpfulness: question.answer_helpful,
+            photos: question.url ? [question.url] : []
+          }
       }
       // console.log(questionIndex, 'this is index of question in results array');
     });
@@ -89,6 +89,51 @@ const getAnswers = function (callback, questionId) {
   });
 };
 
+const postAnswer = function (callback, answer, questionId) {
+  let todate = new Date();
+  let ms = Math.floor(todate.getTime() / 1000);
+
+
+  connection.query(`INSERT INTO answers (question_id, body, date_written, answerer_name, answerer_email, reported, helpful) VALUES (${questionId}, "${answer.body}", ${ms}, "${answer.name}", "${answer.email}", 0, 0)`, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+// connection.query('SELECT MAX(id) from answers', function (err, id) {
+//   let nextAnswerId;
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     nextAnswerId = JSON.parse(JSON.stringify(id))[0]['MAX(id)'];
+//     console.log(nextAnswerId);
+//   }
+// });
+
+const postPhoto = function (callback, photos) {
+  connection.query('SELECT MAX(id) from answers', function (err, id) {
+    let nextAnswerId;
+    if (err) {
+      console.log(err);
+    } else {
+      nextAnswerId = JSON.parse(JSON.stringify(id))[0]['MAX(id)'];
+      photos.forEach((photoURL) => {
+        connection.query(`INSERT INTO photos (answer_id, url) VALUES ("${nextAnswerId}", "${photoURL}")`, function (err, data) {
+          if (err) {
+            console.log(err);
+          } else {
+            callback(null, data);
+          }
+        });
+      });
+    }
+  });
+}
+
 module.exports = {
-  getQuestions, getAnswers
+  getQuestions, getAnswers, postAnswer, postPhoto
 };
+

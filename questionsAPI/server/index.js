@@ -30,7 +30,27 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
     }
   }, req.params.question_id);
 });
+
 // TO DO: route to post an answer
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  db.postAnswer((err, data) => {
+    if (err) {
+      res.status(404).send('error');
+    } else {
+      res.status(200).send(data);
+    }
+  }, req.body, req.params.question_id);
+
+  if (!(req.body.photos.length === 0)) {
+    db.postPhoto((err, data) => {
+      if (err) {
+        cosnole.log('error');
+      } else {
+        console.log('photos successfully sent');
+      }
+    }, req.body.photos);
+  }
+});
 // TO DO: route to update helpfulness
 
 app.listen(PORT, () => {
