@@ -14,10 +14,10 @@ write route to update helpfulness
 write one (tests the API) frisby test
 set up new relic (performance monitoring software)
 stress test (k6) -uses computer to spam reqs
-deploy database to AWS
+x deploy database to AWS
 deploy node app to AWS
-stress test with loader.io - uses different IP address to spam reqs
-                implement one optimization ()
+x stress test with loader.io - uses different IP address to spam reqs
+implement one optimization ()
 
 EC2 command to scp -i sdc.pem ~/Downloads/reviews.csv ubuntu@
 

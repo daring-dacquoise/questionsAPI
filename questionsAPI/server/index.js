@@ -5,6 +5,9 @@ const db = require('../db');
 
 const app = express();
 
+// change to port 80 only in EC2 instance
+// sudo npm start
+// port # not needed if it is 80
 const PORT = 3000;
 
 // middleware that intercepts the requests
