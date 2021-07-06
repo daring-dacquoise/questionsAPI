@@ -22,3 +22,6 @@ implement one optimization ()
 EC2 command to scp -i sdc.pem ~/Downloads/reviews.csv ubuntu@
 
 scp -i SDC.pem ~/Users/johnamielyasis/Documents/Work/hr/w8/sdc/sdc_data/baby_questions.csv ubuntu@ip-172-31-7-148:~/home/ubuntu
+
+http://ec2-3-235-44-236.compute-1.amazonaws.com/qa/questions/1
+address for online

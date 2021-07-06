@@ -47,14 +47,35 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
   if (!(req.body.photos.length === 0)) {
     db.postPhoto((err, data) => {
       if (err) {
-        cosnole.log('error');
+        console.log('error');
       } else {
         console.log('photos successfully sent');
       }
     }, req.body.photos);
   }
 });
-// TO DO: route to update helpfulness
+
+// TO DO: PUT route to update question helpfulness
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  db.putQuestionHelpfulness((err, data) => {
+    if (err) {
+      res.status(404).send('putQuestionHelpfulness error');
+    } else {
+      res.status(200).send(data);
+    }
+  }, req.params.question_id);
+});
+
+// TO DO: PUT route to update answer helpfulness
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  db.putAnswerHelpfulness((err, data) => {
+    if (err) {
+      res.status(404).send('Answer helpfulness error');
+    } else {
+      res.status(200).send(data);
+    }
+  }, req.params.answer_id);
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

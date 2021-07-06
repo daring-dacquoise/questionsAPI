@@ -140,7 +140,27 @@ const postPhoto = function (callback, photos) {
   });
 }
 
+const putQuestionHelpfulness = function (callback, questionId) {
+  connection.query(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${questionId}`, function(err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+const putAnswerHelpfulness = function (callback, answerId) {
+  connection.query(`UPDATE answers SET helpful = helpful + 1 WHERE id = ${answerId}`, function(err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
 module.exports = {
-  getQuestions, getAnswers, postAnswer, postPhoto
+  getQuestions, getAnswers, postAnswer, postPhoto, putQuestionHelpfulness, putAnswerHelpfulness
 };
 
