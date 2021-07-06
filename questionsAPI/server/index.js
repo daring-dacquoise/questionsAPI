@@ -40,11 +40,11 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
     if (err) {
       res.status(404).send('error');
     } else {
-      res.status(200).send(data);
+      res.status(201).send(data);
     }
   }, req.body, req.params.question_id);
 
-  if (!(req.body.photos.length === 0)) {
+  if (!(req.body.photos.length === 0) && req.body.photos.length < 6) {
     db.postPhoto((err, data) => {
       if (err) {
         console.log('error');
@@ -59,7 +59,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
   db.putQuestionHelpfulness((err, data) => {
     if (err) {
-      res.status(404).send('putQuestionHelpfulness error');
+      res.status(400).send('putQuestionHelpfulness error');
     } else {
       res.status(200).send(data);
     }
@@ -70,7 +70,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   db.putAnswerHelpfulness((err, data) => {
     if (err) {
-      res.status(404).send('Answer helpfulness error');
+      res.status(400).send('Answer helpfulness error');
     } else {
       res.status(200).send(data);
     }

@@ -17,7 +17,7 @@ const dateConverter = function (num) {
 };
 
 const getQuestions = function (callback, productId) {
-  connection.query(`SELECT questions.*, answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, photos.answer_id as photos_answer_id, photos.url from questions left join answers on questions.id = answers.question_id left join photos on answers.id = photos.answer_id where questions.product_id = ${productId} order by helpful desc, answer_helpful desc`, function (err, data) {
+  connection.query(`SELECT q.*, a.*, photos.answer_id, photos.url FROM (SELECT * FROM questions WHERE product_id = ${productId} ORDER BY helpful DESC LIMIT 5) q LEFT JOIN (SELECT answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, question_id FROM answers ORDER BY answer_helpful DESC) a ON q.id = a.question_id left join photos on a.answer_id = photos.answer_id`, function (err, data) {
 
     // console.log(data);
     /*experimentation
@@ -25,7 +25,10 @@ const getQuestions = function (callback, productId) {
 
     select q.*, answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, photos.answer_id as photos_answer_id, photos.url from (select * from questions where product_id = 2 order by helpful desc limit 5) q left join answers on q.id = answers.question_id left join photos on answers.id = photos.answer_id order by answer_helpful desc;
 
-    SELECT q.*, a.*, photos.answer_id, photos.url FROM (SELECT * FROM questions WHERE product_id = 3 ORDER BY helpful DESC LIMIT 5) q LEFT JOIN (SELECT answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, question_id FROM answers ORDER BY answer_helpful desc) a ON q.id = a.question_id left join photos on a.answer_id = photos.answer_id;
+    SELECT q.*, a.*, photos.answer_id, photos.url FROM (SELECT * FROM questions WHERE product_id = ${productId} ORDER BY helpful DESC LIMIT 5) q LEFT JOIN (SELECT answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, question_id FROM answers ORDER BY answer_helpful DESC LIMIT 2) a ON q.id = a.question_id left join photos on a.answer_id = photos.answer_id;
+
+    OLD:
+    SELECT questions.*, answers.id as answer_id, answers.body as answer_body, answers.date_written as answer_date, answers.answerer_name, answers.answerer_email, answers.helpful as answer_helpful, photos.answer_id as photos_answer_id, photos.url from questions left join answers on questions.id = answers.question_id left join photos on answers.id = photos.answer_id where questions.product_id = ${productId} order by helpful desc, answer_helpful desc
     */
 
     let result = {
