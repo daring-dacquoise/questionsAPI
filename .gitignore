@@ -3,3 +3,4 @@ node_modules/
 SDC.pem
 aws.sh
 config.js
+newrelic.js

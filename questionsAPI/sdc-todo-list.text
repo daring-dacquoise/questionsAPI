@@ -3,8 +3,8 @@ SDC To-do List
 x Insert full data CSV into database
 x write query to get all questions for product
 x write query to post an answer
-xwrite query to change helpfulness
-write ctrlr fn for all three
+x write query to change helpfulness
+x write ctrlr fn for all three
 x - all questions
 x - post an answer
 x - change helpfulness
@@ -15,8 +15,8 @@ x write one (tests the API) frisby test
 set up new relic (performance monitoring software)
 stress test (k6) -uses computer to spam reqs
 x deploy database to AWS
-deploy node app to AWS
-x stress test with loader.io - uses different IP address to spam reqs
+x deploy node app to AWS
+stress test with loader.io - uses different IP address to spam reqs
 implement one optimization ()
 
 EC2 command to scp -i sdc.pem ~/Downloads/reviews.csv ubuntu@
