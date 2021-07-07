@@ -12,7 +12,7 @@ x write route to get all questions
 x write route to post an answer
 x write route to update helpfulness
 x write one (tests the API) frisby test
-set up new relic (performance monitoring software)
+x set up new relic (performance monitoring software)
 stress test (k6) -uses computer to spam reqs
 x deploy database to AWS
 x deploy node app to AWS

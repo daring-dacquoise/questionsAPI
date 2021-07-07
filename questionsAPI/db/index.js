@@ -35,7 +35,6 @@ const getQuestions = function (callback, productId) {
       product_id: productId,
       results: []
     };
-    console.log(data);
 
     data.forEach(question => {
       let questionIndex = result.results.findIndex(x => x.question_id === question.id)
