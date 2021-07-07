@@ -83,21 +83,21 @@ ALTER TABLE `photos` ADD FOREIGN KEY (answer_id) REFERENCES `answers` (`id`);
 -- INSERT INTO `photos` (`id`,`answer_id`,`url`) VALUES
 -- ('','','');
 
-LOAD DATA LOCAL INFILE '/home/ubuntu/baby_questions.csv'
-INTO TABLE questions
+LOAD DATA LOCAL INFILE '/home/ubuntu/sdc_data/answers_photos.csv'
+INTO TABLE answers_photos
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE '/home/ubuntu/baby_answers.csv'
+LOAD DATA LOCAL INFILE '/home/ubuntu/sdc_data/answers.csv'
 INTO TABLE answers
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE '/home/ubuntu/baby_photos.csv'
+LOAD DATA LOCAL INFILE '/home/ubuntu/sdc_data/answers_photos.csv'
 INTO TABLE photos
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
